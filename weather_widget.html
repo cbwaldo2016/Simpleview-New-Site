@@ -1,0 +1,145 @@
+<!--SVMETA
+{
+	"requireBundles" : ["plugins_weather_shared"]
+}
+-->
+
+{{~exec(function() {
+	helpers.var.isHomepage = function() {
+		if(data.widgetArgs.nav.folderHref === '/home/') {
+			return 'homepage';
+		}
+	}
+})}}
+
+
+<div class="{{:~var.isHomepage()}}weatherHome{{?}}weatherInterior{{/}}" data-sv-weatherWidget></div>
+<script type="text/template" data-weatherwidget-header>
+	{{$}}
+		<div id="sv-weather-widget" class="weather">
+			
+			<div class="sv-weather-widget-icon">
+				<div class="weather-icon icons {{!isHomepage}}hide{{/isHomepage}}" data-sv-weather-trigger data-sv-weather-bar>
+					<span class="show-for-large-up">Current<br />Weather</span>
+					<div class='icon' style="background-image : url('{{iconsrc}}')" ></div>
+				</div>
+				
+				<div class="weather-text {{!isHomepage}}active{{/isHomepage}} row collapse" data-sv-weather-bar>
+					{{:isHomepage}}<div class="closeWeather hide-for-large-up" data-sv-weather-trigger><img src="/includes/public/assets/images/weather-close.png"></div>{{/isHomepage}}
+					<div class="large-4 large-push-8 columns">
+						<span class="weather-icon-display ">
+							<span class="text show-for-large-up">Current<br />Weather</span>
+							<span class="text mobile hide-for-large-up">Current Weather</span>
+							<span class='iconFill {{:isHomepage}}home{{/isHomepage}}' style="background-image : url('{{iconsrcfill}}')"></span>
+						</span>
+					</div>
+					<div class="large-8 large-pull-4 columns">
+						<div class="weatherTemp">
+							<div class="sv-weather-widget-fTemp">{{temp}}F</div>
+							<div class="sv-weather-widget-cTemp">{{ctemp}}C</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	
+		<div class="clear"></div>
+	{{/}}
+</script>
+
+<script>
+	require(["jquery","goatee", "domReady!"], function($,goatee) {
+		var root = $("[data-sv-weatherWidget]");
+		var current_conditions_template= $("[data-weatherwidget-header]").html();
+		var settings = {{~exec(function() { return JSON.stringify(data); })}};
+		var isHomepage = settings.widgetArgs.nav.folderHref;
+		
+		var args = {
+			'woeids' : settings.customSettings.woeids[0],
+			'unit_of_measure' : settings.customSettings.unit_of_measure,
+
+		};
+
+		$.get('/includes/plugins/weather/get_weather/?woeids='+args.woeids+'&unit='+args.unit_of_measure, function(res) {
+			if (res.success === false) { return; }
+			
+			var data = res.data[0];
+			var measure = '&deg;';
+			var condition = {};
+			var imageMapping = {
+				0 : "tornado-1",
+				1 : "don't display",
+				2 : "don't display",
+				3 : "severe-thunderstorm",
+				4 : "thunderstorm-day-2",
+				5 : "rain-and-snow",
+				6 : "heavy-hail",
+				7 : "rain-and-snow",
+				8 : "rain-and-snow",
+				9 : "drizzle",
+				10 : "heavy-hail",
+				11 : "heavy-rain-1",
+				12 : "heavy-rain-1",
+				13 : "snow",
+				14 : "snow",
+				15 : "snow",
+				16 : "snow",
+				17 : "heavy-hail",
+				18 : "heavy-hail",
+				19 : "wind-2",
+				20 : "fog-1",
+				21 : "fog-2",
+				22 : "don't display",
+				23 : "wind-2",
+				24 : "wind-2",
+				25 : "thermometer-4",
+				26 : "mostly-cloudy-1",
+				27 : "mostly-cloudy-2",
+				28 : "mostly-cloudy-2",
+				29 : "partly-cloudy-3",
+				30 : "partly-cloudy-1",
+				31 : "moon-1",
+				32 : "sun-1",
+				33 : "moon-1",
+				34 : "sun-1",
+				35 : "heavy-hail",
+				36 : "thermometer-1",
+				37 : "thunderstorm 2",
+				38 : "thunderstorm 2",
+				39 : "thunderstorm 2",
+				40 : "rain-1",
+				41 : "blizzard",
+				42 : "snow",
+				43 : "blizzard",
+				44 : "partly-cloudy-2",
+				45 : "thunderstorm 2",
+				46 : "snow",
+				47 : "thunderstorm 2"
+			};
+
+			if (data.item !== undefined) {
+				condition = {
+					'iconsrc' : '/includes/public/assets/weather/white/'+imageMapping[data.item.condition.code] + ".svg",
+					'iconsrcfill' : '/includes/public/assets/weather/orange/'+imageMapping[data.item.condition.code] + ".svg",
+					'temp' : data.item.condition.temp + measure,
+					'ctemp' : Math.round((data.item.condition.temp - 32) * (5/9)) + measure,
+					'link' : "/visitor-info/weather",
+					'isHomepage' : isHomepage === '/home/'
+				};
+			}
+
+			var html = goatee.fill( current_conditions_template,condition);
+			root.html(html);
+			
+		   	$('[data-sv-weather-trigger]').click(function() {
+				$('[data-sv-weather-bar]').toggleClass("active");
+			});
+			
+
+			
+		});
+
+	
+	});
+</script>

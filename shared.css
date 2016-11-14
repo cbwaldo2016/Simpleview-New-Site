@@ -1,0 +1,173 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/*
+	This is the core css file for the weather plugin if you need to change it please extended it on your client 
+*/
+.slideshow_container{position: relative;}
+
+.weatherHome #sv-weather-widget { position: absolute; right: 0px; bottom: 25px; font-size: 20px; z-index: 12;}
+.weatherInterior #sv-weather-widget { position: absolute; right: -4px; bottom: 0px; font-size: 20px; margin-right: 10px; z-index: 12;}
+
+#sv-weather-widget .sv-weather-widget-icon .icon {
+    background-repeat: no-repeat;
+    height: 54px;
+    width: 54px;
+    top: 18px;
+    position: relative;
+}
+
+#sv-weather-widget .sv-weather-widget-icon .iconFill {
+	background-size: cover;
+    background-position: 50%;
+    width: 37px;
+    height: 56px;
+}
+
+#sv-weather-widget .weather-icon {
+    color: #ffffff;
+    line-height: 19px;
+    font-size: 16px;
+}
+#sv-weather-widget .weather-icon span{
+	margin-right: 5px;
+	font-family: "proxima-nova",sans-serif;
+    font-style: normal;
+    font-weight: 700;
+}
+
+#sv-weather-widget .sv-weather-widget-icon .weather-icon{display: inline-flex;}
+#sv-weather-widget .sv-weather-widget-icon .weather-text{display: none;}
+
+#sv-weather-widget .sv-weather-widget-icon .weather-icon.icons.active{display: none}
+#sv-weather-widget .sv-weather-widget-icon .weather-text.active{display: block;}
+
+
+
+
+#sv-weather-widget .weather-text.active, {display: block;}
+
+
+#sv-weather-widget .weather-text.active, #sv-weather-widget .sv-weather-widget-icon:hover .weather-text{
+	background: #ffffff;
+	width: 106px;
+	color: #ff7f41;
+	height: auto;
+	padding: 13px 0px 0px 0px;
+    position: relative;
+    top: 25px;
+}
+
+.weatherInterior #sv-weather-widget .weather-text.active {top: 0; left: 0;}
+
+#sv-weather-widget .weather-text .closeWeather{
+	position: absolute;
+    top: 3px;
+    z-index: 10;
+    right: 0;
+}
+
+#sv-weather-widget .weather-text .closeWeather img{ 
+	width: 60%; 
+	position: relative;
+    right: -5px;
+}
+
+#sv-weather-widget .weather-text .weatherTemp { font-family:'Proxima Nova W08 Bd'; display: inline-flex;}
+
+#sv-weather-widget .weather-text .weather-icon-display span.iconFill{display: inline-block;}
+
+.weatherInterior #sv-weather-widget .weather-text .weather-icon-display {display: inherit;}
+
+#sv-weather-widget .weather-text .weather-icon-display span.iconFill.home{display: none;}
+
+.weatherInterior #sv-weather-widget .weather-text .weather-icon-display span.iconFill{display: block; position: relative; top: 13px;}
+
+#sv-weather-widget .weather-text .sv-weather-widget-fTemp{
+	font-size: 24px; 
+	margin: 7px 7px;
+	font-family: "proxima-nova",sans-serif;
+	font-style: normal;
+	font-weight: 700;
+}
+
+#sv-weather-widget .weather-text .sv-weather-widget-cTemp{
+	font-size: 14px; 
+	position: relative; 
+	top: 12px;
+	font-family: "proxima-nova",sans-serif;
+    font-style: normal;
+    font-weight: 700;
+}
+
+#sv-weather-widget .weather-text span.weather-icon-display {
+    top: 5px;
+    right: -6px;
+    position: relative;
+    font-family: 'Proxima Nova W08 Bd';
+    display: inline-flex;
+}
+
+#sv-weather-widget .weather-text span.weather-icon-display span {
+    font-size: 12px;
+    margin-right: 3px;
+    line-height: 17px;
+    margin-top: -15px;
+}
+
+.weatherInterior #sv-weather-widget .weather-text span.weather-icon-display span {margin-top: -19px;}
+
+#sv-weather-widget .weather-text.active span.weather-icon-display span.text, #sv-weather-widget .sv-weather-widget-icon:hover .weather-text span.weather-icon-display span.text {
+	position: relative; 
+	top: 5px; 
+	left: 3px;
+	font-family: "proxima-nova",sans-serif;
+    font-style: normal;
+    font-weight: 700;
+}
+
+@media only screen and (min-width: 40.063em) { 
+	.weatherHome #sv-weather-widget { right: 34px; bottom: 34px;}
+
+	#sv-weather-widget .sv-weather-widget-icon .icon {
+		height: 63px;
+    	width: 64px;
+		left: 20px;
+	}
+	
+	#sv-weather-widget .weather-text.active, #sv-weather-widget .sv-weather-widget-icon:hover .weather-text {width: 139px; top: 34px; left: 44px;}
+	#sv-weather-widget .weather-text span.weather-icon-display span {font-size: 14px}
+	#sv-weather-widget .weather-text .sv-weather-widget-fTemp{font-size: 34px; margin: 18px 10px;}
+	#sv-weather-widget .weather-text .sv-weather-widget-cTemp{font-size: 18px; top: 25px}
+	#sv-weather-widget .weather-text.active span.weather-icon-display span.text, #sv-weather-widget .sv-weather-widget-icon:hover .weather-text span.weather-icon-display span.text { top: 11px;}
+
+	#sv-weather-widget .sv-weather-widget-icon .iconFill {height: 60px;}
+
+	.weatherInterior #sv-weather-widget {right: 10px; bottom: 0px;}
+	.weatherInterior #sv-weather-widget .weather-text .weather-icon-display span.iconFill{top: 21px;}
+
+
+}
+
+@media only screen and (min-width: 64.063em) { 
+	.weatherHome #sv-weather-widget { right: 20px; bottom: 50px;}
+	.weatherInterior #sv-weather-widget {right: 10px;}
+
+	#sv-weather-widget .sv-weather-widget-icon .icon {top: -14px; left: 0;}
+
+	#sv-weather-widget .weather-text.active, #sv-weather-widget .sv-weather-widget-icon:hover .weather-text { width: auto; top: 6px; left: 3px; padding: 10px 0px 10px 0px;}
+	#sv-weather-widget .weather-text .sv-weather-widget-fTemp{font-size: 60px; margin: 24px 20px 0 20px;}
+	#sv-weather-widget .weather-text .sv-weather-widget-cTemp{top: 8px; font-size: 22px; margin-right: 66px;}
+	#sv-weather-widget .weather-text .weather-icon-display span.iconFill.home{display: inline-block; top: -17px; position: relative;}
+	#sv-weather-widget .weather-text.active span.weather-icon-display span.text, #sv-weather-widget .sv-weather-widget-icon:hover .weather-text span.weather-icon-display span.text {top: -2px; left: -13px; position: relative;}
+
+	
+	#sv-weather-widget .sv-weather-widget-icon:hover .weather-icon{display: none}
+	#sv-weather-widget .sv-weather-widget-icon:hover .weather-text{display: block;}
+
+
+	.weatherInterior #sv-weather-widget .weather-text.active {top: 0; left: 0;}
+	.weatherInterior #sv-weather-widget .weather-text .weather-icon-display {display: inline-flex;}
+	.weatherInterior #sv-weather-widget .weather-text .weather-icon-display span.iconFill{display: inline-block; top: -17px;}
+	.weatherInterior #sv-weather-widget .weather-text span.weather-icon-display span {margin-top: -15px;}
+}
